@@ -13,7 +13,6 @@ clients = {}
 data_lock = threading.Lock()
 
 def broadcast(message):
-    """Trimite un mesaj JSON catre toti clientii conectati."""
     msg_encoded = json.dumps(message).encode('utf-8')
     with data_lock:
         for name, conn in clients.items():
@@ -23,7 +22,6 @@ def broadcast(message):
                 pass
 
 def end_auction(product_name):
-    """Functie chemata de Timer cand expira timpul unui produs."""
     with data_lock:
         if product_name in products:
             products[product_name]['active'] = False
@@ -39,7 +37,6 @@ def end_auction(product_name):
     })
 
 def handle_client(conn, addr):
-    """Thread dedicat pentru fiecare client conectat."""
     username = None
     print(f"[SERVER] Conexiune noua de la {addr}")
     
