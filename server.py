@@ -7,6 +7,15 @@ HOST = '0.0.0.0'
 PORT = 5000
 LICITATIE_DURATION = 60 
 
+
+
+# COMENZI TESTARE:
+# 1. Creare imagine:   docker build -t server-licitatie .
+# 2. Pornire server:   docker run -p 5000:5000 server-licitatie
+# 3. Pornire client:   python client.py (in terminale NOI)
+# *Oprire containere (in caz de eroare port): docker stop $(docker ps -q)
+
+
 products = {}
 clients = {}
 
@@ -31,6 +40,7 @@ def end_auction(product_name):
         "type": "notification",
         "message": f"Licitatia pentru produsul '{product_name}' a expirat!"
     })
+    time.sleep(0.1)
     broadcast({
         "type": "update",
         "products": products
@@ -92,6 +102,7 @@ def handle_client(conn, addr):
                     "type": "notification",
                     "message": f"Produs nou: '{prod_name}' cu pret minim {min_price} de catre {username}."
                 })
+                time.sleep(0.1)
                 broadcast({
                     "type": "update",
                     "products": products
@@ -129,6 +140,7 @@ def handle_client(conn, addr):
                             }).encode('utf-8'))
                         except:
                             pass
+                time.sleep(0.1)
                 broadcast({
                     "type": "update",
                     "products": products
