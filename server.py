@@ -15,6 +15,8 @@ LICITATIE_DURATION = 60
 # 3. Pornire client:   python client.py (in terminale NOI)
 # *Oprire containere (in caz de eroare port): docker stop $(docker ps -q)
 
+# docker system prune -a -f
+# docker compose up --build
 
 products = {}
 clients = {}
